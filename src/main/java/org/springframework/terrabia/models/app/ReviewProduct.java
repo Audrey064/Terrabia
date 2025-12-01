@@ -1,0 +1,47 @@
+package org.springframework.terrabia.models.app;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.terrabia.models.enumerations.Rating;
+import org.springframework.terrabia.models.metier.Customer;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+
+@Entity
+@Table(name = "reviewProduct")
+
+public class ReviewProduct {
+    @Id
+@GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
+    private String comment;
+
+    @Enumerated(EnumType.STRING)
+    private Rating rating;
+
+    @ManyToOne(cascade = CascadeType.DETACH)
+    private Order order;
+
+    @ManyToOne(cascade = CascadeType.DETACH)
+    private Customer client;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+
+
+}
