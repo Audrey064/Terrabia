@@ -19,7 +19,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.springframework.terrabia.models.enumerations.UserRole.ADMIN;
+import static org.springframework.terrabia.models.enumerations.UserRole.*;
 
 
 @Configuration
@@ -35,9 +35,21 @@ public class SecurityConfig {
     public SecurityFilterChain SecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
+
                 .authorizeHttpRequests(auth -> auth
+
                         .requestMatchers("/api/v1/auth/**").permitAll()
+
                         .requestMatchers("/api/v1/admin/**").hasRole(ADMIN.name())
+                        .requestMatchers("/api/v1/category/add-a-category").hasRole(ADMIN.name())
+                        .requestMatchers("/api/v1/category/update-category").hasRole(ADMIN.name())
+                        .requestMatchers("/api/v1/category/delete-category").hasRole(ADMIN.name())
+
+
+
+                        .requestMatchers("/api/v1/category/get/**").hasAnyRole(ADMIN.name(), FARMER.name(), CUSTOMER.name())
+
+
                         .anyRequest().authenticated()
                 )
 

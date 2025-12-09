@@ -1,6 +1,7 @@
 package org.springframework.terrabia.utils;
 
 import org.springframework.terrabia.models.dtos.requests.RegisterRequest;
+import org.springframework.terrabia.models.dtos.responses.CategoryDTO;
 import org.springframework.terrabia.models.enumerations.UserRole;
 
 public class Utilities {
@@ -26,6 +27,21 @@ public class Utilities {
             throw new IllegalArgumentException("Domain name is required for farmers");
         }
 
+    }
+
+    public static void verifyCreateCategory(CategoryDTO category){
+
+        if(category == null){
+            throw new IllegalArgumentException("Category can't be null");
+        }
+
+        if(category.getName() == null){
+            throw new IllegalArgumentException("The field name is required");
+        }
+
+        if (category.getDescription() == null){
+            throw new IllegalArgumentException("The field description is required");
+        }
     }
 
 }

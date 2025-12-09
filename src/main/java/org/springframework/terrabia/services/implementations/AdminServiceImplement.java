@@ -1,7 +1,7 @@
 package org.springframework.terrabia.services.implementations;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
+
 import org.springframework.stereotype.Service;
 import org.springframework.terrabia.exceptions.ResourceNotFoundException;
 import org.springframework.terrabia.models.dtos.responses.UserResponse;
@@ -9,7 +9,7 @@ import org.springframework.terrabia.models.enumerations.UserRole;
 import org.springframework.terrabia.models.metier.User;
 import org.springframework.terrabia.repositories.UserRepository;
 import org.springframework.terrabia.services.interfaces.AdminService;
-import org.springframework.terrabia.services.interfaces.JwtService;
+
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -21,8 +21,6 @@ import java.util.stream.Collectors;
 public class AdminServiceImplement implements AdminService {
 
     private final UserRepository userRepository;
-    private final AuthenticationManager authManager;
-    private final JwtService jwtService;
 
     @Override
     public Set<UserResponse> getAllUsersByRole(UserRole role) {
