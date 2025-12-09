@@ -25,17 +25,21 @@ public class StockByProduct {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(nullable = false)
     private Long quantity;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UNITY unity;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     private Product product;
 
+    @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @Column(nullable = false)
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 

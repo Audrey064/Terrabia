@@ -29,6 +29,7 @@ public class ReviewShipping {
 
     private String comment;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Rating rating;
 
@@ -38,9 +39,11 @@ public class ReviewShipping {
     @ManyToOne(cascade = CascadeType.DETACH)
     private Shipping shipping;
 
+    @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @Column(nullable = false)
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 }

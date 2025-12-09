@@ -26,8 +26,10 @@ public class ReviewProduct {
 @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+
     private String comment;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Rating rating;
 
@@ -37,9 +39,11 @@ public class ReviewProduct {
     @ManyToOne(cascade = CascadeType.DETACH)
     private Customer client;
 
+    @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @Column(nullable = false)
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 

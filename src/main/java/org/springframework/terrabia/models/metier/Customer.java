@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 
 @Entity
-@Table(name = "client")
+@Table(name = "customer")
 
 public class Customer extends Person {
 

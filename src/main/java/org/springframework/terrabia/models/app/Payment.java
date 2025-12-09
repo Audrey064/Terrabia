@@ -24,13 +24,17 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private PaymentMethod method;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ProcessStatus status;
 
+    @Column(nullable = false)
     private String referenceTransaction;
 
+    @Column(nullable = false)
     private LocalDateTime paymentDate;
 }

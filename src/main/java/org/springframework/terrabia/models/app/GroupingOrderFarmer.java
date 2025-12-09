@@ -24,6 +24,7 @@ public class GroupingOrderFarmer {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ProcessStatus status;
 

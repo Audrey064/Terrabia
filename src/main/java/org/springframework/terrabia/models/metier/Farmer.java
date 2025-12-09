@@ -1,9 +1,6 @@
 package org.springframework.terrabia.models.metier;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,8 +16,9 @@ import org.springframework.terrabia.models.app.Stock;
 @Entity
 @Table(name = "Farmer")
 
-public class Farmer extends User {
+public class Farmer extends Person {
 
+    @Column(nullable = false,  unique = true)
     private String domainName;
 
     @OneToOne(cascade = CascadeType.PERSIST)

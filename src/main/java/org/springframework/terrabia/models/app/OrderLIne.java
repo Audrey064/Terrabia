@@ -21,11 +21,12 @@ public class OrderLIne {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-
     private UUID id;
 
+    @Column(nullable = false)
     private int quantity;
 
+    @Column(nullable = false)
     private float unitPrice;
 
     @ManyToOne(cascade = CascadeType.DETACH)

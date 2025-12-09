@@ -16,8 +16,13 @@ import lombok.Setter;
 
 public class DeliveryAgency extends User{
 
+    @Column(nullable = false)
     private String agencyName;
 
+    @Column(nullable = false)
     private String address;
+
+    @Column(nullable = false)
+    private String phoneNumber;
 
 }

@@ -1,10 +1,7 @@
 package org.springframework.terrabia.models.app;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -16,6 +13,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 
+@Builder
+
 @Entity
 @Table(name = "account")
 
@@ -24,13 +23,17 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(nullable = false, unique = true)
     private UUID accountNumber;
 
+    @Column(nullable = false)
     private float balance;
 
+    @Column(nullable = false, unique = true)
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @Column(nullable = false)
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 }

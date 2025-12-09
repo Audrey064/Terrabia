@@ -27,14 +27,17 @@ public class Stock {
 @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(nullable = false)
     private Long totalQuantity;
 
     @OneToMany(cascade = CascadeType.DETACH)
     private Set<StockByProduct> stockByProducts;
 
+    @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @Column(nullable = false)
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 

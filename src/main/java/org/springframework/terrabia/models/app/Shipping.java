@@ -26,11 +26,13 @@ public class Shipping {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(nullable = false)
     private float amount;
 
     @Enumerated(EnumType.STRING)
     private ProcessStatus status;
 
+    @Column(nullable = false)
     private LocalDateTime shippingDate;
 
     @ManyToOne(cascade = CascadeType.DETACH)
@@ -39,6 +41,7 @@ public class Shipping {
     @ManyToOne(cascade = CascadeType.DETACH)
     private DeliveryAgency agency;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CoverageArea area;
 }

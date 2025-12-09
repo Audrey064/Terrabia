@@ -25,8 +25,10 @@ public class Order {
 
     private UUID id;
 
+    @Column(nullable = false)
     private float totalAmount;
 
+    @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime orderDate;
 
