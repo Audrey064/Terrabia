@@ -1,13 +1,17 @@
 package org.springframework.terrabia.models.dtos.responses;
 
-import lombok.Builder;
-import org.springframework.terrabia.models.metier.User;
+import lombok.*;
+
 
 @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class RegisterResponse {
 
     private String token;
-    private User user;
+    private UserResponse userResponse;
 
 }

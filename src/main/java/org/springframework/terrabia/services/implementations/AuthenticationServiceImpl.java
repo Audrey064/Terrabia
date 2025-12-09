@@ -14,7 +14,9 @@ import org.springframework.terrabia.exceptions.ResourceNotFoundException;
 import org.springframework.terrabia.models.app.Account;
 import org.springframework.terrabia.models.dtos.requests.LoginRequest;
 import org.springframework.terrabia.models.dtos.requests.RegisterRequest;
+import org.springframework.terrabia.models.dtos.responses.AccountDto;
 import org.springframework.terrabia.models.dtos.responses.RegisterResponse;
+import org.springframework.terrabia.models.dtos.responses.UserResponse;
 import org.springframework.terrabia.models.enumerations.UserRole;
 import org.springframework.terrabia.models.metier.Customer;
 import org.springframework.terrabia.models.metier.Farmer;
@@ -48,16 +50,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         verifyRegisterRequest(request);
 
-/*        if(request.getRole() ==  UserRole.ADMIN ){
-              throw new SecurityException("You can't sign up an administrative user");
-            throw new BusinessException("An admin can't self-register");
-        }
-
-        if(request.getRole() ==  UserRole.DELIVERY_AGENCY ){
-                throw new SecurityException("You can't sign up an agency");
-            throw new BusinessException("An agency can't self-register");
-        }*/
-
         if(isForbiddenSelfRegistrationRole(request.getRole())){
             throw new BusinessValidation("You can't self-register");
         }
@@ -73,9 +65,20 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         userRepository.save(user);
         String jwtToken = jwtService.generateToken(user.getEmail());
 
+        AccountDto accountDto = new AccountDto();
+        accountDto.setId(user.getAccount().getId());
+        accountDto.setAccountNumber(user.getAccount().getAccountNumber());
+        accountDto.setBalance(user.getAccount().getBalance());
+
+        UserResponse userResponse = new UserResponse();
+        userResponse.setId(user.getId());
+        userResponse.setEmail(user.getEmail());
+        userResponse.setRole(user.getRole());
+        userResponse.setAccountDto(accountDto);
+
         return RegisterResponse.builder()
                 .token(jwtToken)
-                .user(user)
+                .userResponse(userResponse)
                 .build();
 
 
@@ -127,9 +130,21 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         String jwtToken = jwtService.generateToken(user.getEmail());
 
+        AccountDto accountDto = new AccountDto();
+        accountDto.setId(user.getAccount().getId());
+        accountDto.setAccountNumber(user.getAccount().getAccountNumber());
+        accountDto.setBalance(user.getAccount().getBalance());
+
+        UserResponse userResponse = new UserResponse();
+        userResponse.setId(user.getId());
+        userResponse.setEmail(user.getEmail());
+        userResponse.setRole(user.getRole());
+        userResponse.setAccountDto(accountDto);
+
+
         return RegisterResponse.builder()
                 .token(jwtToken)
-                .user(user)
+                .userResponse(userResponse)
                 .build();
     }
 
